@@ -5,5 +5,5 @@ Tag 1 Logbuch
 
 funktion()
 {
-	echo "hallo";
+	echo "hallo i bims ";
 }
