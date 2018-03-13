@@ -303,7 +303,7 @@ public class dashboard extends HttpServlet {
                 + "				<a href=\"#\"><i class=\"fab fa-facebook-square\"></i></a>\n"
                 + "				<a href=\"#\"><i class=\"fab fa-twitter-square\"></i></a>\n"
                 + "				<a href=\"#\"><i class=\"fab fa-linkedin\"></i></a>\n"
-                + "				<a href=\"#\"><i class=\"fab fa-git-square\"></i></a>\n"
+                + "				<a href=\"https://github.com/Beeerrt/Temp_Dashboard\"><i class=\"fab fa-git-square\"></i></a>\n"
                 + "\n"
                 + "			</div>\n"
                 + "\n"
@@ -316,7 +316,7 @@ public class dashboard extends HttpServlet {
                 + "					·\n"
                 + "				</p>\n"
                 + "\n"
-                + "				<p>Company Name &copy; 2015</p>\n"
+                + "				<p>Goldener Janni &copy; 2018</p>\n"
                 + "			</div>\n"
                 + "\n"
                 + "		</footer>";
