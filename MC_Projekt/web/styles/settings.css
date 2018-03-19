@@ -19,6 +19,10 @@
 {
     width: 50%;
 }
+.cardcontainer
+{
+    margin-top: 80px !important;
+}
 
 .btn
 {

@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import DB.dbConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -199,7 +197,7 @@ public class setting extends HttpServlet {
 
         //HTML Body
         String htmlBody = "<body>\n"
-                + "  <nav class=\"navbar navbar-dark bg-dark\">\n"
+                + "  <nav class=\"navbar navbar-dark fixed-top bg-dark\">\n"
                 + "    <span class=\"navbar-text\">\n"
                 + "<i class=\"fas fa-cogs\"></i>"
                 + "            Einstellungen\n"
@@ -208,7 +206,7 @@ public class setting extends HttpServlet {
                 + "  <div class=\"container\">\n"
                 + "    <div class=\"row\">\n"
                 + "      <div class=\"col\">\n"
-                + "        <div class=\"card\">\n"
+                + "        <div class=\"card cardcontainer\">\n"
                 + "          <div class=\"card-body\">\n"
                 + "            <h3 class=\"card-title\">Daemon Einstellungen</h3>\n"
                 + "              <form action=\"" + request.getContextPath() + "/setting\" method=\"post\">\n"
@@ -241,23 +239,8 @@ public class setting extends HttpServlet {
                 + "              <div class=\"row\">\n";
 
         //ADC Auswahl
-        String adcSelection = "";
-        for (int i = 0; i < this.adc.length; i++) {
-            adcSelection += "<div class=\"col-sm\">"
-                    + "<div class=\"custom-control custom-checkbox\">";
-
-            //Prüfen ob gecheckt
-            if (this.adc[i]==1) {
-                adcSelection += "<input type=\"checkbox\" class=\"custom-control-input\" name=\"adcCheck" + i + "\" id=\"adcCheck" + i + "\" checked >";
-            } else {
-                adcSelection += "<input type=\"checkbox\" class=\"custom-control-input\" name=\"adcCheck" + i + "\" id=\"adcCheck" + i + "\">";
-            }
-
-            adcSelection += " <label class=\"custom-control-label\" for=\"adcCheck" + i + "\">ADC" + i + "</label>\n"
-                    + "                        </div>\n"
-                    + "                    </div>\n";
-
-        }
+        String adcSelection = addSelectionHTML();
+        
 
         htmlBody += adcSelection;
 
@@ -265,7 +248,7 @@ public class setting extends HttpServlet {
                 + "              \n"
                 + "            <div class=\"row\">\n"
                 + "              <div class=\"col\">\n"
-                + "                <a href=\"/MC_Projekt/\" class=\"btn btn-danger\">"
+                + "                <a href=\""+request.getContextPath() +"\" class=\"btn btn-danger\">"
                 + "<i class=\"fas fa-arrow-circle-left fa-lg\"></i></a>\n"
                 + "              </div>\n"
                 + "              <div class=\"col\">\n"
@@ -315,4 +298,32 @@ public class setting extends HttpServlet {
         return htmlStart + htmlHead + htmlBody +htmlfooter +htmlEnd;
     }
 
+    /**
+     * Baut das HTML Template der ADC Auswahl zusammen.
+     *
+     * @return HTML ADC Template
+     */
+    private String addSelectionHTML()
+    {
+        //ADC Auswahl
+        String adcSelection = "";
+        
+        for (int i = 0; i < this.adc.length; i++) {
+            adcSelection += "<div class=\"col-sm\">"
+                    + "<div class=\"custom-control custom-checkbox\">";
+
+            //Prüfen ob gecheckt
+            if (this.adc[i]==1) {
+                adcSelection += "<input type=\"checkbox\" class=\"custom-control-input\" name=\"adcCheck" + i + "\" id=\"adcCheck" + i + "\" checked >";
+            } else {
+                adcSelection += "<input type=\"checkbox\" class=\"custom-control-input\" name=\"adcCheck" + i + "\" id=\"adcCheck" + i + "\">";
+            }
+
+            adcSelection += " <label class=\"custom-control-label\" for=\"adcCheck" + i + "\">ADC" + i + "</label>\n"
+                    + "                        </div>\n"
+                    + "                    </div>\n";
+
+        }
+        return adcSelection;
+    }
 }

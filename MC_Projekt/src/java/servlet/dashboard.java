@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
 /**
@@ -34,7 +35,17 @@ public class dashboard extends HttpServlet {
     //List der ADC die am Controller verfügbar sind
     ArrayList<adc> adcList;
 
-    /**
+    @Override
+    public void init() throws ServletException {
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config); //To change body of generated methods, choose Tools | Templates.
+    }
+     
+   /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -49,7 +60,9 @@ public class dashboard extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             try {
                 adcList = new ArrayList<>();
+                //Laden der Aktiven ADC's
                 loadADC();
+                //Teperaturwerte der Aktiven ADC's laden
                 loadTempFromADC();
             } catch (SQLException ex) {
                 System.out.println("Beim Abfragen der DB ist ein Fehler aufgetretten: " + ex.getMessage());
@@ -174,7 +187,7 @@ public class dashboard extends HttpServlet {
 
         //HTML Body
         String htmlNav = "<body>"
-                + "<nav class=\"navbar navbar-dark bg-dark\">\n"
+                + "<nav class=\"navbar navbar-dark fixed-top bg-dark\">\n"
                 + "    <span class=\"navbar-text\">\n"
                 + "<i class=\"fas fa-desktop\"></i>\n"
                 + "            Dashboard\n"
@@ -185,7 +198,7 @@ public class dashboard extends HttpServlet {
                 + "\n"
                 + "    <div class=\"row\">\n"
                 + "      <div class=\"col\">\n"
-                + "        <div class=\"card\">"
+                + "        <div class=\"card cardcontainer\">"
                 + "          <div class=\"card-body\">"
                 + "<div class=\"row\">\n";
 
@@ -233,7 +246,7 @@ public class dashboard extends HttpServlet {
         String htmlContainerEnd = "             <div class=\"row\">\n"
                 + "              <div class=\"col\">\n"
                 + "                <a href=\"javascript:history.go(0)\" class=\"btn btn-success\"><i class=\"fas fa-sync-alt fa-lg\"></i></a>\n"
-                + "                <a href=\"/MC_Projekt/\" class=\"btn btn-danger\"><i class=\"fas fa-arrow-circle-left fa-lg\"></i></a>\n"
+                + "                <a href=\""+request.getContextPath()+"\" class=\"btn btn-danger\"><i class=\"fas fa-arrow-circle-left fa-lg\"></i></a>\n"
                 + "              </div>\n"
                 + "            </div>\n"
                 + "          </div>\n"
